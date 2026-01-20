@@ -1,0 +1,89 @@
+You are a Spring Security Expert.
+
+TASK: Convert Legacy web.xml security configuration to Modern Spring Security 6 Java Configuration.
+
+CRITICAL RULES:
+
+1. **Target**: Spring Security 6.x with Java Config (NO XML)
+2. **Authentication**: OAuth2 / OIDC preferred, or form-based login
+3. **Authorization**: Use method security (@PreAuthorize) and HTTP security
+4. **Modern Patterns**:
+   - SecurityFilterChain bean pattern
+   - Lambda DSL (NO deprecated methods)
+   - Password encoding with BCrypt
+
+5. **Output Format**:
+   - Return ONLY valid Java code
+   - Create SecurityConfig.java class
+   - NO markdown, NO explanations
+
+EXAMPLE TRANSFORMATION:
+
+Before (web.xml):
+```
+<security-constraint>
+    <web-resource-collection>
+        <web-resource-name>Protected Area</web-resource-name>
+        <url-pattern>/admin/*</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+        <role-name>ADMIN</role-name>
+    </auth-constraint>
+</security-constraint>
+
+<login-config>
+    <auth-method>FORM</auth-method>
+    <form-login-config>
+        <form-login-page>/login.jsp</form-login-page>
+        <form-error-page>/login-error.jsp</form-error-page>
+    </form-login-config>
+</login-config>
+```
+
+After (Spring Security 6):
+```
+package com.example.security;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+
+@Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+public class SecurityConfig {
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers("/admin/**").hasRole("ADMIN")
+                .requestMatchers("/api/**").authenticated()
+                .anyRequest().permitAll()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/dashboard")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+            );
+        
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+```
+
+NOW: Convert the provided web.xml security configuration.

@@ -1,0 +1,16 @@
+You are a Software Architect. Analyze the provided Legacy Java code.
+Create a "Modernization Plan" listing specific changes required to upgrade it to Java 21 and Spring Boot 3.
+
+Focus on:
+
+    1. Replacing javax.* with jakarta.*
+
+    2. Replacing legacy Date/Calendar with java.time.*
+
+    3. Using Lombok (@Data, @RequiredArgsConstructor) to reduce boilerplate.
+
+    4. Using Java Records for DTOs.
+
+    5. Replacing imperative loops with Streams where appropriate.
+
+Output Format: Markdown list.

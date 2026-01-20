@@ -1,0 +1,36 @@
+# Assembly Line Modernizer Configuration
+
+app:
+  # Mode: 'analyze' or 'modernize'
+  mode: "analyze"
+
+input:
+  # Type: 'file', 'directory', or 'zip'
+  # Note: The code auto-detects zip vs directory, but this can be used for validation or explicit intent
+  type: "directory"
+  # Path to the source (can be absolute or relative)
+  path: "workspace/input_legacy"
+
+output:
+  # Directory for generated specifications
+  specs_dir: "workspace/output_specs"
+  
+  # Directory for the consolidated project summary (project.md)
+  # Usually same as specs_dir, but can be different
+  summary_dir: "workspace/output_specs"
+  
+  # Directory for modernized code output
+  modern_dir: "workspace/output_modern"
+  
+  # Directory for planner reports (.json)
+  # If not specified, defaults to workspace/output_reports
+  reports_dir: "workspace/output_reports"
+  
+  # Final ZIP output path (optional, for 'modernize' mode with zip input)
+  # If left empty, it defaults to 'workspace/modernized_app.zip'
+  final_zip_path: "workspace/modernized_app.zip"
+
+advanced:
+  # Enable/Disable specific agents (future proofing)
+  enable_scanner: true
+  enable_summarizer: true

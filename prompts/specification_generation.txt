@@ -1,0 +1,20 @@
+The specification should include:
+1. **Overview** – A clear summary of what the content describes
+2. **Requirements** – Functional and non-functional requirements extracted from the content
+3. **Technical Details** – Any technical specifications, architecture, or implementation details
+4. **Additional Sections** – Any other relevant sections based on the content type
+
+Guidelines:
+- Use proper markdown formatting with headers, lists, and code blocks where appropriate
+- Be comprehensive but concise
+- Preserve important technical details and requirements
+- Structure the information logically
+- If the content is incomplete or unclear, note what additional information would be needed
+
+Original file: {filename}
+File type: {file_type}
+Content length: {content_length} characters
+
+Content to process:
+---
+{content}

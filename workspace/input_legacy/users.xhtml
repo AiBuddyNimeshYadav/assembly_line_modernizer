@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>User Management</title>
+</h:head>
+
+<h:body>
+    <h:form id="userForm">
+        <p:panel header="User Management" styleClass="user-panel">
+            
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                    <p:inputText id="search" 
+                                 value="#{userController.searchTerm}" 
+                                 placeholder="Search users..."/>
+                    <p:commandButton value="Search" 
+                                     action="#{userController.searchUsers}"
+                                     update="userTable"
+                                     icon="pi pi-search"/>
+                </p:toolbarGroup>
+                
+                <p:toolbarGroup align="right">
+                    <p:commandButton value="New User" 
+                                     onclick="PF('userDialog').show();"
+                                     icon="pi pi-plus"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+            
+            <p:dataTable id="userTable" 
+                         value="#{userController.users}" 
+                         var="user"
+                         paginator="true" 
+                         rows="10"
+                         selectionMode="single"
+                         selection="#{userController.selectedUser}">
+                
+                <p:column headerText="ID">
+                    <h:outputText value="#{user.id}"/>
+                </p:column>
+                
+                <p:column headerText="Name" sortBy="#{user.name}">
+                    <h:outputText value="#{user.name}"/>
+                </p:column>
+                
+                <p:column headerText="Email" sortBy="#{user.email}">
+                    <h:outputText value="#{user.email}"/>
+                </p:column>
+                
+                <p:column headerText="Created Date">
+                    <h:outputText value="#{user.createdDate}">
+                        <f:convertDateTime pattern="yyyy-MM-dd"/>
+                    </h:outputText>
+                </p:column>
+                
+                <p:column headerText="Actions">
+                    <p:commandButton icon="pi pi-trash" 
+                                     action="#{userController.deleteUser(user)}"
+                                     update="userTable"
+                                     styleClass="ui-button-danger">
+                        <p:confirm header="Confirmation" 
+                                   message="Delete this user?" 
+                                   icon="pi pi-exclamation-triangle"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+        </p:panel>
+        
+        <p:dialog id="userDialog" 
+                  header="User Details" 
+                  widgetVar="userDialog"
+                  modal="true" 
+                  showEffect="fade" 
+                  hideEffect="fade">
+            <p:panelGrid columns="2">
+                <p:outputLabel for="name" value="Name:"/>
+                <p:inputText id="name" value="#{userController.selectedUser.name}" required="true"/>
+                
+                <p:outputLabel for="email" value="Email:"/>
+                <p:inputText id="email" value="#{userController.selectedUser.email}" required="true"/>
+            </p:panelGrid>
+            
+            <p:commandButton value="Save" 
+                             action="#{userController.saveUser}"
+                             update="userTable"
+                             oncomplete="PF('userDialog').hide();"
+                             icon="pi pi-check"/>
+            <p:commandButton value="Cancel" 
+                             onclick="PF('userDialog').hide();"
+                             icon="pi pi-times"/>
+        </p:dialog>
+        
+        <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+            <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes"/>
+            <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no"/>
+        </p:confirmDialog>
+        
+    </h:form>
+</h:body>
+</html>

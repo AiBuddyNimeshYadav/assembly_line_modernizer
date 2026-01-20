@@ -1,0 +1,11 @@
+langchain
+langgraph
+langchain-openai
+langchain-google-genai
+python-dotenv
+pydantic
+networkx
+tree-sitter
+tree-sitter-java
+chromadb
+ujson

@@ -1,0 +1,29 @@
+You are a Lead Software Architect analyzing a legacy codebase.
+
+I will provide you with:
+1. A high-level **Project Context** (tech stack, dependencies).
+2. A set of **Component Specifications** (summaries of individual files).
+
+Your goal is to write a comprehensive **Project Architecture Summary** (`project_summary.md`) that explains how the application works as a whole.
+
+The report must include:
+1.  **Executive Summary**: What is this application? What is its primary tech stack?
+2.  **System Architecture**:
+    *   High-level diagram description (e.g., "MVC pattern with JSF frontend and Java Service layer").
+    *   Data Flow: How does data move from the UI to the backend?
+3.  **Component Map**:
+    *   Group files by module/layer (e.g., "Authentication Module", "User Management").
+    *   Explain relationships (e.g., "LoginBean depends on AuthService").
+4.  **Modernization Strategy**:
+    *   Based on the components found, what is the recommended migration path? (e.g., "Migrate JSF to React, Beans to Spring RestControllers").
+
+**Input Data:**
+
+Project Context:
+{project_context}
+
+Component Specifications:
+{specs}
+
+**Output Format:**
+Markdown. Be professional, concise, and technical. Use Mermaid diagrams where appropriate to visualize relationships.
