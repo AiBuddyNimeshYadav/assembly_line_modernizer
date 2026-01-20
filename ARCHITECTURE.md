@@ -68,7 +68,7 @@ graph TD
 - **Output:** `project_context` dictionary passed to all agents.
 - **Modes:** Runs in both **Analysis** and **Modernization** modes.
 
-### 1. 🔍 Classifier (formerly Archaeologist)
+### 1. 🔍 Classifier
 **Input:** Raw Legacy File (e.g., `UserController.java`, `users.xhtml`)
 **Role:** Identifies what the file is and what it contains.
 - **Logic:**
@@ -89,7 +89,7 @@ graph TD
 - **Output to State:**
   - `specification`: The generated markdown text.
 
-### 3. 📋 DependencyCheck (formerly Strategist)
+### 3. 📋 DependencyCheck
 **Input:** Classification Data
 **Role:** Ensures the file is ready to be processed.
 - **Logic:**
@@ -98,7 +98,7 @@ graph TD
 - **Output to State:**
   - `is_ready_to_process`: `True` or `False`
 
-### 4. 📝 Architect (formerly Planner)
+### 4. 📝 Architect
 **Input:** Legacy Content + File Type
 **Role:** Creates a detailed, step-by-step modernization roadmap.
 - **Logic:**
@@ -107,7 +107,7 @@ graph TD
 - **Output to State:**
   - `modernization_plan`: A text-based plan guiding the CodeGenerator.
 
-### 5. 🔨 CodeGenerator (formerly Worker)
+### 5. 🔨 CodeGenerator
 **Input:** Legacy Content + Modernization Plan + Specialized Prompt
 **Role:** Performs the actual code transformation.
 - **Logic:**
@@ -117,7 +117,7 @@ graph TD
 - **Output to State:**
   - `modern_code`: The transformed code (e.g., Spring Boot Controller or React Component).
 
-### 6. ⚖️ Validator (formerly Auditor)
+### 6. ⚖️ Validator
 **Input:** Generated Modern Code
 **Role:** Validates the output against strict quality rules.
 - **Logic:**
