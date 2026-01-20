@@ -146,7 +146,7 @@ pip install -r requirements.txt
 1. **Run the test** with the sample files
 2. **Review the output** in `workspace/output_modern/`
 3. **Add your real legacy code** to `workspace/input_legacy/`
-4. **Iterate** - The auditor will retry up to 3 times if validation fails
+4. **Iterate** - The validator will retry up to 3 times if validation fails
 
 ---
 
